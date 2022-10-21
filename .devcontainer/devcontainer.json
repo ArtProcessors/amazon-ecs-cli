@@ -17,8 +17,8 @@
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
-	"workspaceMount": "source=${localWorkspaceFolder},target=/go/src/github.com/aws/amazon-ecs-cli,type=bind",
-	"workspaceFolder": "/go/src/github.com/aws/amazon-ecs-cli",
+	//"workspaceMount": "source=${localWorkspaceFolder},target=/go/src/github.com/aws/amazon-ecs-cli,type=bind",
+	//"workspaceFolder": "/go/src/github.com/aws/amazon-ecs-cli",
 	"features": {
 		"git": "os-provided",
 		"aws-cli": "latest",
