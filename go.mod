@@ -5,7 +5,7 @@ go 1.13
 require (
 	bazil.org/fuse v0.0.0-20160811212531-371fbbdaa898 // indirect
 	github.com/Microsoft/hcsshim v0.8.7-0.20190419161850-2226e083fc39 // indirect
-	github.com/aws/aws-sdk-go v1.34.9
+	github.com/aws/aws-sdk-go v1.41.13
 	github.com/awslabs/amazon-ecr-credential-helper v0.4.0
 	github.com/containerd/containerd v1.4.9 // indirect
 	github.com/containerd/ttrpc v1.0.0 // indirect
@@ -51,10 +51,8 @@ require (
 	go.opencensus.io v0.22.3 // indirect
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9 // indirect
 	golang.org/x/mod v0.3.0 // indirect
-	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b
+	golang.org/x/net v0.0.0-20210614182718-04defd469f4e
 	golang.org/x/sync v0.0.0-20201207232520-09787c993a3a // indirect
-	golang.org/x/sys v0.0.0-20190812073006-9eafafc0a87e // indirect
-	golang.org/x/text v0.3.3 // indirect
 	golang.org/x/time v0.1.0 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	google.golang.org/genproto v0.0.0-20200617032506-f1bdc9086088 // indirect

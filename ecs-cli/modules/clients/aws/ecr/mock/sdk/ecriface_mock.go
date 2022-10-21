@@ -349,6 +349,56 @@ func (mr *MockECRAPIMockRecorder) DeleteLifecyclePolicyWithContext(arg0, arg1 in
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteLifecyclePolicyWithContext", reflect.TypeOf((*MockECRAPI)(nil).DeleteLifecyclePolicyWithContext), varargs...)
 }
 
+// DeleteRegistryPolicy mocks base method
+func (m *MockECRAPI) DeleteRegistryPolicy(arg0 *ecr.DeleteRegistryPolicyInput) (*ecr.DeleteRegistryPolicyOutput, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteRegistryPolicy", arg0)
+	ret0, _ := ret[0].(*ecr.DeleteRegistryPolicyOutput)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteRegistryPolicy indicates an expected call of DeleteRegistryPolicy
+func (mr *MockECRAPIMockRecorder) DeleteRegistryPolicy(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteRegistryPolicy", reflect.TypeOf((*MockECRAPI)(nil).DeleteRegistryPolicy), arg0)
+}
+
+// DeleteRegistryPolicyRequest mocks base method
+func (m *MockECRAPI) DeleteRegistryPolicyRequest(arg0 *ecr.DeleteRegistryPolicyInput) (*request.Request, *ecr.DeleteRegistryPolicyOutput) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteRegistryPolicyRequest", arg0)
+	ret0, _ := ret[0].(*request.Request)
+	ret1, _ := ret[1].(*ecr.DeleteRegistryPolicyOutput)
+	return ret0, ret1
+}
+
+// DeleteRegistryPolicyRequest indicates an expected call of DeleteRegistryPolicyRequest
+func (mr *MockECRAPIMockRecorder) DeleteRegistryPolicyRequest(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteRegistryPolicyRequest", reflect.TypeOf((*MockECRAPI)(nil).DeleteRegistryPolicyRequest), arg0)
+}
+
+// DeleteRegistryPolicyWithContext mocks base method
+func (m *MockECRAPI) DeleteRegistryPolicyWithContext(arg0 context.Context, arg1 *ecr.DeleteRegistryPolicyInput, arg2 ...request.Option) (*ecr.DeleteRegistryPolicyOutput, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{arg0, arg1}
+	for _, a := range arg2 {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteRegistryPolicyWithContext", varargs...)
+	ret0, _ := ret[0].(*ecr.DeleteRegistryPolicyOutput)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteRegistryPolicyWithContext indicates an expected call of DeleteRegistryPolicyWithContext
+func (mr *MockECRAPIMockRecorder) DeleteRegistryPolicyWithContext(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{arg0, arg1}, arg2...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteRegistryPolicyWithContext", reflect.TypeOf((*MockECRAPI)(nil).DeleteRegistryPolicyWithContext), varargs...)
+}
+
 // DeleteRepository mocks base method
 func (m *MockECRAPI) DeleteRepository(arg0 *ecr.DeleteRepositoryInput) (*ecr.DeleteRepositoryOutput, error) {
 	m.ctrl.T.Helper()
@@ -447,6 +497,56 @@ func (mr *MockECRAPIMockRecorder) DeleteRepositoryWithContext(arg0, arg1 interfa
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0, arg1}, arg2...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteRepositoryWithContext", reflect.TypeOf((*MockECRAPI)(nil).DeleteRepositoryWithContext), varargs...)
+}
+
+// DescribeImageReplicationStatus mocks base method
+func (m *MockECRAPI) DescribeImageReplicationStatus(arg0 *ecr.DescribeImageReplicationStatusInput) (*ecr.DescribeImageReplicationStatusOutput, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DescribeImageReplicationStatus", arg0)
+	ret0, _ := ret[0].(*ecr.DescribeImageReplicationStatusOutput)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DescribeImageReplicationStatus indicates an expected call of DescribeImageReplicationStatus
+func (mr *MockECRAPIMockRecorder) DescribeImageReplicationStatus(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DescribeImageReplicationStatus", reflect.TypeOf((*MockECRAPI)(nil).DescribeImageReplicationStatus), arg0)
+}
+
+// DescribeImageReplicationStatusRequest mocks base method
+func (m *MockECRAPI) DescribeImageReplicationStatusRequest(arg0 *ecr.DescribeImageReplicationStatusInput) (*request.Request, *ecr.DescribeImageReplicationStatusOutput) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DescribeImageReplicationStatusRequest", arg0)
+	ret0, _ := ret[0].(*request.Request)
+	ret1, _ := ret[1].(*ecr.DescribeImageReplicationStatusOutput)
+	return ret0, ret1
+}
+
+// DescribeImageReplicationStatusRequest indicates an expected call of DescribeImageReplicationStatusRequest
+func (mr *MockECRAPIMockRecorder) DescribeImageReplicationStatusRequest(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DescribeImageReplicationStatusRequest", reflect.TypeOf((*MockECRAPI)(nil).DescribeImageReplicationStatusRequest), arg0)
+}
+
+// DescribeImageReplicationStatusWithContext mocks base method
+func (m *MockECRAPI) DescribeImageReplicationStatusWithContext(arg0 context.Context, arg1 *ecr.DescribeImageReplicationStatusInput, arg2 ...request.Option) (*ecr.DescribeImageReplicationStatusOutput, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{arg0, arg1}
+	for _, a := range arg2 {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DescribeImageReplicationStatusWithContext", varargs...)
+	ret0, _ := ret[0].(*ecr.DescribeImageReplicationStatusOutput)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DescribeImageReplicationStatusWithContext indicates an expected call of DescribeImageReplicationStatusWithContext
+func (mr *MockECRAPIMockRecorder) DescribeImageReplicationStatusWithContext(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{arg0, arg1}, arg2...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DescribeImageReplicationStatusWithContext", reflect.TypeOf((*MockECRAPI)(nil).DescribeImageReplicationStatusWithContext), varargs...)
 }
 
 // DescribeImageScanFindings mocks base method
@@ -613,6 +713,56 @@ func (mr *MockECRAPIMockRecorder) DescribeImagesWithContext(arg0, arg1 interface
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0, arg1}, arg2...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DescribeImagesWithContext", reflect.TypeOf((*MockECRAPI)(nil).DescribeImagesWithContext), varargs...)
+}
+
+// DescribeRegistry mocks base method
+func (m *MockECRAPI) DescribeRegistry(arg0 *ecr.DescribeRegistryInput) (*ecr.DescribeRegistryOutput, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DescribeRegistry", arg0)
+	ret0, _ := ret[0].(*ecr.DescribeRegistryOutput)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DescribeRegistry indicates an expected call of DescribeRegistry
+func (mr *MockECRAPIMockRecorder) DescribeRegistry(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DescribeRegistry", reflect.TypeOf((*MockECRAPI)(nil).DescribeRegistry), arg0)
+}
+
+// DescribeRegistryRequest mocks base method
+func (m *MockECRAPI) DescribeRegistryRequest(arg0 *ecr.DescribeRegistryInput) (*request.Request, *ecr.DescribeRegistryOutput) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DescribeRegistryRequest", arg0)
+	ret0, _ := ret[0].(*request.Request)
+	ret1, _ := ret[1].(*ecr.DescribeRegistryOutput)
+	return ret0, ret1
+}
+
+// DescribeRegistryRequest indicates an expected call of DescribeRegistryRequest
+func (mr *MockECRAPIMockRecorder) DescribeRegistryRequest(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DescribeRegistryRequest", reflect.TypeOf((*MockECRAPI)(nil).DescribeRegistryRequest), arg0)
+}
+
+// DescribeRegistryWithContext mocks base method
+func (m *MockECRAPI) DescribeRegistryWithContext(arg0 context.Context, arg1 *ecr.DescribeRegistryInput, arg2 ...request.Option) (*ecr.DescribeRegistryOutput, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{arg0, arg1}
+	for _, a := range arg2 {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DescribeRegistryWithContext", varargs...)
+	ret0, _ := ret[0].(*ecr.DescribeRegistryOutput)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DescribeRegistryWithContext indicates an expected call of DescribeRegistryWithContext
+func (mr *MockECRAPIMockRecorder) DescribeRegistryWithContext(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{arg0, arg1}, arg2...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DescribeRegistryWithContext", reflect.TypeOf((*MockECRAPI)(nil).DescribeRegistryWithContext), varargs...)
 }
 
 // DescribeRepositories mocks base method
@@ -929,6 +1079,56 @@ func (mr *MockECRAPIMockRecorder) GetLifecyclePolicyWithContext(arg0, arg1 inter
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0, arg1}, arg2...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLifecyclePolicyWithContext", reflect.TypeOf((*MockECRAPI)(nil).GetLifecyclePolicyWithContext), varargs...)
+}
+
+// GetRegistryPolicy mocks base method
+func (m *MockECRAPI) GetRegistryPolicy(arg0 *ecr.GetRegistryPolicyInput) (*ecr.GetRegistryPolicyOutput, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetRegistryPolicy", arg0)
+	ret0, _ := ret[0].(*ecr.GetRegistryPolicyOutput)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetRegistryPolicy indicates an expected call of GetRegistryPolicy
+func (mr *MockECRAPIMockRecorder) GetRegistryPolicy(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetRegistryPolicy", reflect.TypeOf((*MockECRAPI)(nil).GetRegistryPolicy), arg0)
+}
+
+// GetRegistryPolicyRequest mocks base method
+func (m *MockECRAPI) GetRegistryPolicyRequest(arg0 *ecr.GetRegistryPolicyInput) (*request.Request, *ecr.GetRegistryPolicyOutput) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetRegistryPolicyRequest", arg0)
+	ret0, _ := ret[0].(*request.Request)
+	ret1, _ := ret[1].(*ecr.GetRegistryPolicyOutput)
+	return ret0, ret1
+}
+
+// GetRegistryPolicyRequest indicates an expected call of GetRegistryPolicyRequest
+func (mr *MockECRAPIMockRecorder) GetRegistryPolicyRequest(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetRegistryPolicyRequest", reflect.TypeOf((*MockECRAPI)(nil).GetRegistryPolicyRequest), arg0)
+}
+
+// GetRegistryPolicyWithContext mocks base method
+func (m *MockECRAPI) GetRegistryPolicyWithContext(arg0 context.Context, arg1 *ecr.GetRegistryPolicyInput, arg2 ...request.Option) (*ecr.GetRegistryPolicyOutput, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{arg0, arg1}
+	for _, a := range arg2 {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetRegistryPolicyWithContext", varargs...)
+	ret0, _ := ret[0].(*ecr.GetRegistryPolicyOutput)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetRegistryPolicyWithContext indicates an expected call of GetRegistryPolicyWithContext
+func (mr *MockECRAPIMockRecorder) GetRegistryPolicyWithContext(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{arg0, arg1}, arg2...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetRegistryPolicyWithContext", reflect.TypeOf((*MockECRAPI)(nil).GetRegistryPolicyWithContext), varargs...)
 }
 
 // GetRepositoryPolicy mocks base method
@@ -1362,6 +1562,106 @@ func (mr *MockECRAPIMockRecorder) PutLifecyclePolicyWithContext(arg0, arg1 inter
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0, arg1}, arg2...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PutLifecyclePolicyWithContext", reflect.TypeOf((*MockECRAPI)(nil).PutLifecyclePolicyWithContext), varargs...)
+}
+
+// PutRegistryPolicy mocks base method
+func (m *MockECRAPI) PutRegistryPolicy(arg0 *ecr.PutRegistryPolicyInput) (*ecr.PutRegistryPolicyOutput, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "PutRegistryPolicy", arg0)
+	ret0, _ := ret[0].(*ecr.PutRegistryPolicyOutput)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PutRegistryPolicy indicates an expected call of PutRegistryPolicy
+func (mr *MockECRAPIMockRecorder) PutRegistryPolicy(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PutRegistryPolicy", reflect.TypeOf((*MockECRAPI)(nil).PutRegistryPolicy), arg0)
+}
+
+// PutRegistryPolicyRequest mocks base method
+func (m *MockECRAPI) PutRegistryPolicyRequest(arg0 *ecr.PutRegistryPolicyInput) (*request.Request, *ecr.PutRegistryPolicyOutput) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "PutRegistryPolicyRequest", arg0)
+	ret0, _ := ret[0].(*request.Request)
+	ret1, _ := ret[1].(*ecr.PutRegistryPolicyOutput)
+	return ret0, ret1
+}
+
+// PutRegistryPolicyRequest indicates an expected call of PutRegistryPolicyRequest
+func (mr *MockECRAPIMockRecorder) PutRegistryPolicyRequest(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PutRegistryPolicyRequest", reflect.TypeOf((*MockECRAPI)(nil).PutRegistryPolicyRequest), arg0)
+}
+
+// PutRegistryPolicyWithContext mocks base method
+func (m *MockECRAPI) PutRegistryPolicyWithContext(arg0 context.Context, arg1 *ecr.PutRegistryPolicyInput, arg2 ...request.Option) (*ecr.PutRegistryPolicyOutput, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{arg0, arg1}
+	for _, a := range arg2 {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "PutRegistryPolicyWithContext", varargs...)
+	ret0, _ := ret[0].(*ecr.PutRegistryPolicyOutput)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PutRegistryPolicyWithContext indicates an expected call of PutRegistryPolicyWithContext
+func (mr *MockECRAPIMockRecorder) PutRegistryPolicyWithContext(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{arg0, arg1}, arg2...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PutRegistryPolicyWithContext", reflect.TypeOf((*MockECRAPI)(nil).PutRegistryPolicyWithContext), varargs...)
+}
+
+// PutReplicationConfiguration mocks base method
+func (m *MockECRAPI) PutReplicationConfiguration(arg0 *ecr.PutReplicationConfigurationInput) (*ecr.PutReplicationConfigurationOutput, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "PutReplicationConfiguration", arg0)
+	ret0, _ := ret[0].(*ecr.PutReplicationConfigurationOutput)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PutReplicationConfiguration indicates an expected call of PutReplicationConfiguration
+func (mr *MockECRAPIMockRecorder) PutReplicationConfiguration(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PutReplicationConfiguration", reflect.TypeOf((*MockECRAPI)(nil).PutReplicationConfiguration), arg0)
+}
+
+// PutReplicationConfigurationRequest mocks base method
+func (m *MockECRAPI) PutReplicationConfigurationRequest(arg0 *ecr.PutReplicationConfigurationInput) (*request.Request, *ecr.PutReplicationConfigurationOutput) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "PutReplicationConfigurationRequest", arg0)
+	ret0, _ := ret[0].(*request.Request)
+	ret1, _ := ret[1].(*ecr.PutReplicationConfigurationOutput)
+	return ret0, ret1
+}
+
+// PutReplicationConfigurationRequest indicates an expected call of PutReplicationConfigurationRequest
+func (mr *MockECRAPIMockRecorder) PutReplicationConfigurationRequest(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PutReplicationConfigurationRequest", reflect.TypeOf((*MockECRAPI)(nil).PutReplicationConfigurationRequest), arg0)
+}
+
+// PutReplicationConfigurationWithContext mocks base method
+func (m *MockECRAPI) PutReplicationConfigurationWithContext(arg0 context.Context, arg1 *ecr.PutReplicationConfigurationInput, arg2 ...request.Option) (*ecr.PutReplicationConfigurationOutput, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{arg0, arg1}
+	for _, a := range arg2 {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "PutReplicationConfigurationWithContext", varargs...)
+	ret0, _ := ret[0].(*ecr.PutReplicationConfigurationOutput)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PutReplicationConfigurationWithContext indicates an expected call of PutReplicationConfigurationWithContext
+func (mr *MockECRAPIMockRecorder) PutReplicationConfigurationWithContext(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{arg0, arg1}, arg2...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PutReplicationConfigurationWithContext", reflect.TypeOf((*MockECRAPI)(nil).PutReplicationConfigurationWithContext), varargs...)
 }
 
 // SetRepositoryPolicy mocks base method
