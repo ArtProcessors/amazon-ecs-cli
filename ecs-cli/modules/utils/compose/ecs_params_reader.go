@@ -43,16 +43,23 @@ type ECSParams struct {
 
 // EcsTaskDef corresponds to fields in an ECS TaskDefinition
 type EcsTaskDef struct {
-	NetworkMode          string         `yaml:"ecs_network_mode"`
-	TaskRoleArn          string         `yaml:"task_role_arn"`
-	PIDMode              string         `yaml:"pid_mode"`
-	IPCMode              string         `yaml:"ipc_mode"`
-	ContainerDefinitions ContainerDefs  `yaml:"services"`
-	ExecutionRole        string         `yaml:"task_execution_role"`
-	TaskSize             TaskSize       `yaml:"task_size"` // Needed to run FARGATE tasks
-	DockerVolumes        []DockerVolume `yaml:"docker_volumes"`
-	EFSVolumes           []EFSVolume    `yaml:"efs_volumes"`
-	PlacementConstraints []Constraint   `yaml:"placement_constraints"`
+	NetworkMode          string             `yaml:"ecs_network_mode"`
+	TaskRoleArn          string             `yaml:"task_role_arn"`
+	PIDMode              string             `yaml:"pid_mode"`
+	IPCMode              string             `yaml:"ipc_mode"`
+	ContainerDefinitions ContainerDefs      `yaml:"services"`
+	ExecutionRole        string             `yaml:"task_execution_role"`
+	EnableExecuteCommand bool               `yaml:"enable_execute_command"`
+	RuntimePlatform      RuntimePlatformDef `yaml:"runtime_platform"`
+	TaskSize             TaskSize           `yaml:"task_size"` // Needed to run FARGATE tasks
+	DockerVolumes        []DockerVolume     `yaml:"docker_volumes"`
+	EFSVolumes           []EFSVolume        `yaml:"efs_volumes"`
+	PlacementConstraints []Constraint       `yaml:"placement_constraints"`
+}
+
+type RuntimePlatformDef struct {
+	CpuArchitecture       string `yaml:"cpu_architecture"`
+	OperatingSystemFamily string `yaml:"operating_system_family"`
 }
 
 // ContainerDefs is a map of ContainerDefs within a task definition

@@ -59,6 +59,45 @@ task_definition:
 	}
 }
 
+func TestReadECSParamsExecute(t *testing.T) {
+	ecsParamsString := `version: 1
+task_definition:
+  ecs_network_mode: host
+  task_role_arn: arn:aws:iam::123456789012:role/my_role
+  enable_execute_command: true`
+
+	content := []byte(ecsParamsString)
+
+	tmpfile, err := ioutil.TempFile("", "ecs-params")
+	assert.NoError(t, err, "Could not create ecs-params tempfile")
+
+	ecsParamsFileName := tmpfile.Name()
+	defer os.Remove(ecsParamsFileName)
+
+	_, err = tmpfile.Write(content)
+	assert.NoError(t, err, "Could not write data to ecs-params tempfile")
+
+	err = tmpfile.Close()
+	assert.NoError(t, err, "Could not close tempfile")
+
+	ecsParams, err := ReadECSParams(ecsParamsFileName)
+
+	if assert.NoError(t, err) {
+		assert.Equal(t, "1", ecsParams.Version, "Expected version to match")
+		taskDef := ecsParams.TaskDefinition
+		assert.Equal(t, "host", taskDef.NetworkMode, "Expected network mode to match")
+		assert.Equal(t, "arn:aws:iam::123456789012:role/my_role", taskDef.TaskRoleArn, "Expected task role ARN to match")
+		assert.True(t, taskDef.EnableExecuteCommand)
+
+		// Should still populate other fields with empty values
+		assert.Empty(t, taskDef.ExecutionRole)
+		assert.Empty(t, taskDef.RuntimePlatform)
+		awsvpcConfig := ecsParams.RunParams.NetworkConfiguration.AwsVpcConfiguration
+		assert.Empty(t, awsvpcConfig.Subnets)
+		assert.Empty(t, awsvpcConfig.SecurityGroups)
+	}
+}
+
 func TestReadECSParams_FileDoesNotExist(t *testing.T) {
 	_, err := ReadECSParams("nonexistant.yml")
 	assert.Error(t, err)
@@ -157,14 +196,14 @@ task_definition:
 		assert.ElementsMatch(t, expectedSecrets, wordpress.Secrets, "Expected secrets to match")
 		assert.ElementsMatch(t, expectedSecrets, wordpress.Logging.SecretOptions, "Expected secrets to match")
 
-		expectedContainerDependencies := []ContainerDependency {
-			ContainerDependency {
+		expectedContainerDependencies := []ContainerDependency{
+			ContainerDependency{
 				ContainerName: "mysql",
-				Condition: "STARTED",
+				Condition:     "STARTED",
 			},
-			ContainerDependency {
+			ContainerDependency{
 				ContainerName: "log_router",
-				Condition: "STARTED",
+				Condition:     "STARTED",
 			},
 		}
 
@@ -257,6 +296,59 @@ run_params:
 		assert.Equal(t, "0.5GB", taskDef.TaskSize.Memory)
 		assert.Equal(t, "256", taskDef.TaskSize.Cpu)
 
+		awsvpcConfig := ecsParams.RunParams.NetworkConfiguration.AwsVpcConfiguration
+		assert.Equal(t, 2, len(awsvpcConfig.Subnets), "Expected 2 subnets")
+		assert.Equal(t, []string{"subnet-feedface", "subnet-deadbeef"}, awsvpcConfig.Subnets, "Expected subnets to match")
+		assert.Equal(t, 2, len(awsvpcConfig.SecurityGroups), "Expected 2 securityGroups")
+		assert.Equal(t, []string{"sg-bafff1ed", "sg-c0ffeefe"}, awsvpcConfig.SecurityGroups, "Expected security groups to match")
+		assert.Equal(t, Enabled, awsvpcConfig.AssignPublicIp, "Expected AssignPublicIp to match")
+	}
+}
+
+func TestReadECSParams_WithFargateArmParams(t *testing.T) {
+	ecsParamsString := `version: 1
+task_definition:
+  ecs_network_mode: awsvpc
+  task_execution_role: arn:aws:iam::123456789012:role/fargate_role
+  task_size:
+    mem_limit: 0.5GB
+    cpu_limit: 256
+  runtime_platform:
+    cpu_architecture: ARM64
+    operating_system_family: LINUX
+run_params:
+  network_configuration:
+    awsvpc_configuration:
+      subnets: [subnet-feedface, subnet-deadbeef]
+      security_groups:
+        - sg-bafff1ed
+        - sg-c0ffeefe
+      assign_public_ip: ENABLED`
+
+	content := []byte(ecsParamsString)
+
+	tmpfile, err := ioutil.TempFile("", "ecs-params")
+	assert.NoError(t, err, "Could not create ecs-params tempfile")
+
+	ecsParamsFileName := tmpfile.Name()
+	defer os.Remove(ecsParamsFileName)
+
+	_, err = tmpfile.Write(content)
+	assert.NoError(t, err, "Could not write data to ecs-params tempfile")
+
+	err = tmpfile.Close()
+	assert.NoError(t, err, "Could not close tempfile")
+
+	ecsParams, err := ReadECSParams(ecsParamsFileName)
+
+	if assert.NoError(t, err) {
+		taskDef := ecsParams.TaskDefinition
+		assert.Equal(t, "awsvpc", taskDef.NetworkMode, "Expected network mode to match")
+		assert.Equal(t, "arn:aws:iam::123456789012:role/fargate_role", taskDef.ExecutionRole)
+		assert.Equal(t, "0.5GB", taskDef.TaskSize.Memory)
+		assert.Equal(t, "256", taskDef.TaskSize.Cpu)
+		assert.Equal(t, taskDef.RuntimePlatform.CpuArchitecture, "ARM64")
+		assert.Equal(t, taskDef.RuntimePlatform.OperatingSystemFamily, "LINUX")
 		awsvpcConfig := ecsParams.RunParams.NetworkConfiguration.AwsVpcConfiguration
 		assert.Equal(t, 2, len(awsvpcConfig.Subnets), "Expected 2 subnets")
 		assert.Equal(t, []string{"subnet-feedface", "subnet-deadbeef"}, awsvpcConfig.Subnets, "Expected subnets to match")

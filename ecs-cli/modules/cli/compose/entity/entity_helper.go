@@ -129,6 +129,7 @@ func createRegisterTaskDefinitionRequest(taskDefinition *ecs.TaskDefinition, tag
 		TaskRoleArn:             taskDefinition.TaskRoleArn,
 		RequiresCompatibilities: taskDefinition.RequiresCompatibilities,
 		ExecutionRoleArn:        taskDefinition.ExecutionRoleArn,
+		RuntimePlatform:         taskDefinition.RuntimePlatform,
 		PidMode:                 taskDefinition.PidMode,
 		IpcMode:                 taskDefinition.IpcMode,
 		PlacementConstraints:    taskDefinition.PlacementConstraints,
@@ -146,6 +147,16 @@ func createRegisterTaskDefinitionRequest(taskDefinition *ecs.TaskDefinition, tag
 		request.Memory = memory
 	}
 
+	if taskDefinition.RuntimePlatform != nil {
+
+		if cpuarchitecture := taskDefinition.RuntimePlatform.CpuArchitecture; aws.StringValue(cpuarchitecture) != "" {
+			request.RuntimePlatform.CpuArchitecture = cpuarchitecture
+		}
+
+		if osfamily := taskDefinition.RuntimePlatform.OperatingSystemFamily; aws.StringValue(osfamily) != "" {
+			request.RuntimePlatform.OperatingSystemFamily = osfamily
+		}
+	}
 	if len(tags) > 0 {
 		request.Tags = tags
 	}

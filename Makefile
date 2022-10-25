@@ -98,13 +98,13 @@ docker-test:
 		golang:$(GO_RELEASE_TAG) make test
 
 .PHONY: supported-platforms
-supported-platforms: $(LINUX_BINARY) $(DARWIN_BINARY) $(WINDOWS_BINARY)
+supported-platforms: $(DARWIN_BINARY) $(LINUX_BINARY) #$(WINDOWS_BINARY)
 
-$(WINDOWS_BINARY): $(SOURCES)
-	@mkdir -p ./bin/windows-amd64
-	TARGET_GOOS=windows GOARCH=amd64 ./scripts/build_binary.sh ./bin/windows-amd64
-	mv ./bin/windows-amd64/ecs-cli ./bin/windows-amd64/ecs-cli.exe
-	@echo "Built ecs-cli.exe for windows"
+# $(WINDOWS_BINARY): $(SOURCES)
+# 	@mkdir -p ./bin/windows-amd64
+# 	TARGET_GOOS=windows GOARCH=amd64 ./scripts/build_binary.sh ./bin/windows-amd64
+# 	mv ./bin/windows-amd64/ecs-cli ./bin/windows-amd64/ecs-cli.exe
+# 	@echo "Built ecs-cli.exe for windows"
 
 $(LINUX_BINARY): $(SOURCES)
 	@mkdir -p ./bin/linux-amd64
