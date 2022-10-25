@@ -102,13 +102,16 @@ func ConvertToTaskDefinition(params ConvertTaskDefParams) (*ecs.TaskDefinition, 
 
 	executionRoleArn := taskDefParams.executionRoleArn
 
-	runtimePlatform := ecs.RuntimePlatform{}
 	placementConstraints := convertToTaskDefinitionConstraints(params.ECSParams)
-	if &taskDefParams.runtimePlatform != nil {
-		runtimePlatform = ecs.RuntimePlatform{
-			CpuArchitecture:       &taskDefParams.runtimePlatform.CpuArchitecture,
-			OperatingSystemFamily: &taskDefParams.runtimePlatform.OperatingSystemFamily,
-		}
+
+	runtimePlatform := ecs.RuntimePlatform{}
+
+	if taskDefParams.runtimePlatform.CpuArchitecture != "" {
+		runtimePlatform.CpuArchitecture = &taskDefParams.runtimePlatform.CpuArchitecture
+	}
+
+	if taskDefParams.runtimePlatform.OperatingSystemFamily != "" {
+		runtimePlatform.OperatingSystemFamily = &taskDefParams.runtimePlatform.OperatingSystemFamily
 	}
 
 	// Check for and apply provided ecs-registry-creds values
