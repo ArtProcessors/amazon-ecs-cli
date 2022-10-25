@@ -148,7 +148,9 @@ func createRegisterTaskDefinitionRequest(taskDefinition *ecs.TaskDefinition, tag
 	}
 
 	if taskDefinition.RuntimePlatform != nil {
-
+		log.WithFields(log.Fields{
+			"RuntimePlatform": request.RuntimePlatform,
+		}).Info("Using custom RuntimePlatform")
 		if cpuarchitecture := taskDefinition.RuntimePlatform.CpuArchitecture; aws.StringValue(cpuarchitecture) != "" {
 			request.RuntimePlatform.CpuArchitecture = cpuarchitecture
 		}

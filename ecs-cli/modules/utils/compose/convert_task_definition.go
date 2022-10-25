@@ -26,14 +26,16 @@ import (
 
 // TaskDefParams contains basic fields to build an ECS task definition
 type TaskDefParams struct {
-	networkMode      string
-	taskRoleArn      string
-	cpu              string
-	memory           string
-	pidMode          string
-	ipcMode          string
-	containerDefs    ContainerDefs
-	executionRoleArn string
+	networkMode          string
+	taskRoleArn          string
+	cpu                  string
+	memory               string
+	pidMode              string
+	ipcMode              string
+	containerDefs        ContainerDefs
+	executionRoleArn     string
+	enableExecuteCommand bool
+	runtimePlatform      RuntimePlatformDef
 }
 
 // ConvertTaskDefParams contains the inputs required to convert compose & ECS inputs into an ECS task definition
@@ -100,7 +102,14 @@ func ConvertToTaskDefinition(params ConvertTaskDefParams) (*ecs.TaskDefinition, 
 
 	executionRoleArn := taskDefParams.executionRoleArn
 
+	runtimePlatform := ecs.RuntimePlatform{}
 	placementConstraints := convertToTaskDefinitionConstraints(params.ECSParams)
+	if &taskDefParams.runtimePlatform != nil {
+		runtimePlatform = ecs.RuntimePlatform{
+			CpuArchitecture:       &taskDefParams.runtimePlatform.CpuArchitecture,
+			OperatingSystemFamily: &taskDefParams.runtimePlatform.OperatingSystemFamily,
+		}
+	}
 
 	// Check for and apply provided ecs-registry-creds values
 	if params.ECSRegistryCreds != nil {
@@ -137,6 +146,8 @@ func ConvertToTaskDefinition(params ConvertTaskDefParams) (*ecs.TaskDefinition, 
 		Cpu:                  aws.String(taskDefParams.cpu),
 		Memory:               aws.String(taskDefParams.memory),
 		ExecutionRoleArn:     aws.String(executionRoleArn),
+		RuntimePlatform:      &runtimePlatform,
+
 		PlacementConstraints: placementConstraints,
 	}
 
@@ -400,6 +411,8 @@ func convertTaskDefParams(ecsParams *ECSParams) (params TaskDefParams, e error) 
 	params.executionRoleArn = taskDef.ExecutionRole
 	params.ipcMode = taskDef.IPCMode
 	params.pidMode = taskDef.PIDMode
+	params.enableExecuteCommand = taskDef.EnableExecuteCommand
+	params.runtimePlatform = taskDef.RuntimePlatform
 
 	return params, nil
 }

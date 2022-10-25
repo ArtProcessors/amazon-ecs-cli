@@ -338,10 +338,11 @@ func (t *Task) buildRunTaskInput(taskDefinition string, count int, overrides map
 	}
 
 	runTaskInput := &ecs.RunTaskInput{
-		Cluster:        aws.String(cluster),
-		TaskDefinition: aws.String(taskDefinition),
-		Group:          aws.String(group),
-		Count:          aws.Int64(int64(count)),
+		Cluster:              aws.String(cluster),
+		TaskDefinition:       aws.String(taskDefinition),
+		Group:                aws.String(group),
+		Count:                aws.Int64(int64(count)),
+		EnableExecuteCommand: aws.Bool(ecsParams.TaskDefinition.EnableExecuteCommand),
 	}
 
 	if networkConfig != nil {
