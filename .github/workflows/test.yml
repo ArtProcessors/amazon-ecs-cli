@@ -3,7 +3,7 @@
 
 name: Go build / go test
 
-on: [push, pull_request]
+on: push
 
 jobs:
 
@@ -18,10 +18,10 @@ jobs:
         go-version: 1.13
 
     - name: Build
-      run: go build -v ./...
+      run: make build
 
     - name: Test
-      run: go test -v ./...
+      run: make test
 
     - name: Build for supported platforms
       run: make supported-platforms
