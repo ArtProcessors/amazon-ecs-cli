@@ -15,10 +15,11 @@ ROOT := $(shell pwd)
 
 all: build
 
-SOURCEDIR := ./ecs-cli
+SOURCEDIR := .
 SOURCES := $(shell find $(SOURCEDIR) -name '*.go')
 LOCAL_BINARY := bin/local/ecs-cli
-LINUX_BINARY := bin/linux-amd64/ecs-cli
+LINUX_AMD_BINARY := bin/linux-amd64/ecs-cli
+LINUX_ARM_BINARY := bin/linux-arm64/ecs-cli
 DARWIN_BINARY := bin/darwin-amd64/ecs-cli
 WINDOWS_BINARY := bin/windows-amd64/ecs-cli.exe
 LOCAL_PATH := $(ROOT)/scripts:${PATH}
@@ -98,7 +99,7 @@ docker-test:
 		golang:$(GO_RELEASE_TAG) make test
 
 .PHONY: supported-platforms
-supported-platforms: $(DARWIN_BINARY) $(LINUX_BINARY) #$(WINDOWS_BINARY)
+supported-platforms: $(DARWIN_BINARY) $(LINUX_AMD_BINARY) $(LINUX_ARM_BINARY) #$(WINDOWS_BINARY)
 
 # $(WINDOWS_BINARY): $(SOURCES)
 # 	@mkdir -p ./bin/windows-amd64
@@ -106,15 +107,20 @@ supported-platforms: $(DARWIN_BINARY) $(LINUX_BINARY) #$(WINDOWS_BINARY)
 # 	mv ./bin/windows-amd64/ecs-cli ./bin/windows-amd64/ecs-cli.exe
 # 	@echo "Built ecs-cli.exe for windows"
 
-$(LINUX_BINARY): $(SOURCES)
+$(LINUX_AMD_BINARY): $(SOURCES)
 	@mkdir -p ./bin/linux-amd64
 	TARGET_GOOS=linux GOARCH=amd64 ./scripts/build_binary.sh ./bin/linux-amd64
-	@echo "Built ecs-cli for linux"
+	@echo "Built ecs-cli for linux (amd64)"
+
+$(LINUX_ARM_BINARY): $(SOURCES)
+	@mkdir -p ./bin/linux-arm64
+	TARGET_GOOS=linux GOARCH=arm64 ./scripts/build_binary.sh ./bin/linux-arm64
+	@echo "Built ecs-cli for linux (arm64)"
 
 $(DARWIN_BINARY): $(SOURCES)
 	@mkdir -p ./bin/darwin-amd64
 	TARGET_GOOS=darwin GOARCH=amd64 ./scripts/build_binary.sh ./bin/darwin-amd64
-	@echo "Built ecs-cli for darwin"
+	@echo "Built ecs-cli for darwin (amd64)"
 
 .PHONY: clean
 clean:
