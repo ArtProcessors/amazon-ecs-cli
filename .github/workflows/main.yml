@@ -29,17 +29,17 @@ jobs:
     - name: Archive mac amd64 artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ecs-cli-darwin-amd64-${git.sha}
+        name: ecs-cli-darwin-amd64-${{ github.sha }}
         path: bin/darwin-amd64/ecs-cli
 
     - name: Archive linux amd64 artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ecs-cli-linux-amd64-${git.sha}
+        name: ecs-cli-linux-amd64-${{ github.sha }}
         path: bin/linux-amd64/ecs-cli
 
     - name: Archive linux arm64 artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ecs-cli-linux-arm64-${git.sha}
+        name: ecs-cli-linux-arm64-${{ github.sha }}
         path: bin/linux-arm64/ecs-cli
