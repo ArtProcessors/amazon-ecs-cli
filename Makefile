@@ -34,6 +34,7 @@ $(LOCAL_BINARY): $(SOURCES)
 
 .PHONY: test
 test:
+	go mod vendor
 	env -i PATH=$$PATH GOPATH=$$(go env GOPATH) GOROOT=$$(go env GOROOT) GOCACHE=$$(go env GOCACHE) \
 	go test -race -timeout=120s -cover ./ecs-cli/modules/...
 
