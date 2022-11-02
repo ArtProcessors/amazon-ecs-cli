@@ -43,3 +43,15 @@ jobs:
       with:
         name: ecs-cli-linux-arm64-${{ github.sha }}
         path: bin/linux-arm64/ecs-cli
+
+    - name: build Release artifacts
+      run: make release
+      if: startsWith(github.ref, 'refs/tags/')
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        draft: true
+        files:
+          ./*.tgz
