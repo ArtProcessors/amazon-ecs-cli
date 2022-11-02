@@ -328,6 +328,7 @@ func (s *Service) buildUpdateServiceInput(count *int64, serviceName, taskDefinit
 		Cluster:                 aws.String(cluster),
 		DeploymentConfiguration: deploymentConfig,
 		ForceNewDeployment:      &forceDeployment,
+		EnableExecuteCommand:    &s.ecsContext.ECSParams.TaskDefinition.EnableExecuteCommand,
 	}
 
 	if s.healthCheckGP != nil {
@@ -533,6 +534,7 @@ func (s *Service) buildCreateServiceInput(serviceName, taskDefName string, desir
 		DeploymentConfiguration: s.deploymentConfig,
 		LoadBalancers:           s.loadBalancers,
 		Role:                    aws.String(s.role),
+		EnableExecuteCommand:    &ecsParams.TaskDefinition.EnableExecuteCommand,
 	}
 	// TODO: revert to "LATEST" when latest refers to 1.4.0
 	if launchType == config.LaunchTypeFargate && ecsParams != nil && len(ecsParams.TaskDefinition.EFSVolumes) > 0 {

@@ -313,6 +313,12 @@ func (t *Task) buildRunTaskInput(taskDefinition string, count int, overrides map
 	ecsParams := t.ecsContext.ECSParams
 	networkConfig, err := composeutils.ConvertToECSNetworkConfiguration(ecsParams)
 
+	enableExecuteCommand := false
+	if ecsParams != nil {
+		// Make sure the ECSParams exists before reaching into it
+		enableExecuteCommand = ecsParams.TaskDefinition.EnableExecuteCommand
+	}
+
 	if err != nil {
 		return nil, err
 	}
@@ -338,10 +344,11 @@ func (t *Task) buildRunTaskInput(taskDefinition string, count int, overrides map
 	}
 
 	runTaskInput := &ecs.RunTaskInput{
-		Cluster:        aws.String(cluster),
-		TaskDefinition: aws.String(taskDefinition),
-		Group:          aws.String(group),
-		Count:          aws.Int64(int64(count)),
+		Cluster:              aws.String(cluster),
+		TaskDefinition:       aws.String(taskDefinition),
+		Group:                aws.String(group),
+		Count:                aws.Int64(int64(count)),
+		EnableExecuteCommand: aws.Bool(enableExecuteCommand),
 	}
 
 	if networkConfig != nil {

@@ -174,7 +174,7 @@ func (p *ecsProject) parseECSParams() error {
 	if err != nil {
 		return err
 	}
-
+	logrus.WithField("ecs-params", ecsParams).Debug("Parsed ECS params")
 	p.ecsContext.ECSParams = ecsParams
 
 	return nil
